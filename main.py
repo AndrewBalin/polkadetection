@@ -5,7 +5,7 @@ import cv2
 import csv
 import json
 
-img2vec = Img2Vec(cuda=False)
+img2vec = Img2Vec(cuda=True)
 
 dataset = 'PublicTestSet/'
 th = 0.85
