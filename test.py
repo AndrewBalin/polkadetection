@@ -1,13 +1,17 @@
 import random
+from datetime import datetime
 import os
 import torch.nn as nn
 from img2vec_pytorch import Img2Vec
 from PIL import Image
 
+cuda = True
+
+start_time = datetime.now()
 
 def init():
     # Model initialization
-    return Img2Vec(cuda=True, model='resnet18')
+    return Img2Vec(cuda=cuda, model='vgg', layer=3, layer_output_size=4096)
 
 
 def img_to_vec(img, model):
@@ -17,7 +21,7 @@ def img_to_vec(img, model):
 
 model = init()
 
-dataset = 'C:/Users/Home-PC/Downloads/train_dataset_1/'
+dataset = '../Data/train_dataset_1/'
 n = 20
 
 cos = nn.CosineSimilarity(dim=1, eps=1e-6)
@@ -34,3 +38,4 @@ for _ in range(10):
                 continue
 
 print(sum(a) / len(a))
+print(f"\n\n\nВребя выполнения: {datetime.now() - start_time}, CUDA: {cuda}")
