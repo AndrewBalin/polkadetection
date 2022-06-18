@@ -1,4 +1,7 @@
 img2vec_pytorch
-opencv_python
-Pillow
+opencv-python
+Pillow~=9.1.1
 torch
+numpy
+tensorflow-gpu
+matplotlib
