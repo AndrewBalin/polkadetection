@@ -1,6 +1,6 @@
 img2vec_pytorch
 opencv-python
-Pillow~=9.1.1
+Pillow
 torch
 numpy
 tensorflow-gpu
