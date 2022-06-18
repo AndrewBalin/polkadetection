@@ -1,21 +1,25 @@
 import torch.nn as nn
+from datetime import datetime
 from img2vec_pytorch import Img2Vec
 from PIL import Image
 import cv2
 import csv
 import json
 
-img2vec = Img2Vec(cuda=True)
+start_time = datetime.now()
 
 dataset = 'PublicTestSet/'
-th = 0.85
+th = 0.82
+cuda = True
+
+img2vec = Img2Vec(cuda=cuda, model='vgg', layer=3, layer_output_size=4096)
 
 
 def get_vec_lib(img):
     return img2vec.get_vec(img, tensor=True)
 
 
-def desk_to_cnt(bboxes, prod_img_path, desk_img_path, get_vec, th=0.85):
+def desk_to_cnt(bboxes, prod_img_path, desk_img_path, get_vec, th=th):
     cnt = 0
     prod_vec = get_vec(Image.open(prod_img_path))
     desk_img = cv2.imread(desk_img_path)
@@ -47,3 +51,5 @@ for pair in data:
 with open("submit.csv", "w", newline="") as f:
     writer = csv.writer(f, delimiter=',')
     writer.writerows(res)
+
+print(f"\n\n\nВребя выполнения: {datetime.now() - start_time}, CUDA: {cuda}")
