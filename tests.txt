@@ -1,1 +1,1 @@
-resnet - 0.7750
+resnet-18 (default) - 0.7750
