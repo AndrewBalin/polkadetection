@@ -12,12 +12,12 @@ from keras.models import load_model
 
 start_time = datetime.now()
 
-model = load_model('50k.h5')
+model = load_model('Model1.h5')
 
 model.summary()
 
-dataset = 'PublicTestSet/'
-th = 0.99676
+dataset = 'PrivateTestSet/'
+th = 0.9966
 
 def get_vec_lib(img):
     return model.predict(img)
@@ -55,12 +55,15 @@ with open(dataset + 'requests.csv', newline='') as csv_file:
     data = list(csv.reader(csv_file, delimiter=','))
 
 res = []
+
+
 for pair in data:
     bboxes = shelves.get(pair[0])['bboxes']
     cnt = desk_to_cnt(bboxes, dataset + 'queries/' + pair[1], dataset + 'shelves/' + pair[0], get_vec_lib, th)
     res.append([pair[0], pair[1], cnt])
 
-with open("submit.csv", "w", newline="") as f:
+
+with open("submit_m1.csv", "w", newline="") as f:
     writer = csv.writer(f, delimiter=',')
     writer.writerows(res)
 
