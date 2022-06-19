@@ -1,4 +1,4 @@
-img2vec_pytorch
+progress
 opencv-python
 Pillow
 torch
